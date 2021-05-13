@@ -1,0 +1,48 @@
+<div>
+<div ngIfclass="panel panel-default" style="margin-top:10px;"
+ [ngStyle]="{width:configuration.component_width}">
+ 
+   <div class="search-class" *ngIf=configuration.showSearchBox>
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search" >
+    </div>
+   <div class="panel-heading">
+  <b>{{configuration.table_heading}}</b>  
+  <button type="button" class="close"
+     aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <span class="crossButton" aria-hidden="true">
+  ×
+  </span>
+  </button>
+</div>
+<div class="panel-body" style="position:relative">
+  <div class="table-responsive">
+     <table class="table">
+        <thead>
+           <tr>
+              <th class='tableHeader_class' *ngFor="let column of dataColomns">
+                 {{column}}
+              </th>
+           </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor="let data of tableData| filter:searchText">
+              <td class="tdStyleClass" *ngFor="let col of dataColomns">
+                 <div *ngIf="configuration.showcheckbox && col==='type'"><input type=checkbox></div>
+                 <div>{{data[col]}}</div>
+              </td>
+           </tr>
+        </tbody>
+     </table>
+  </div>
+</div>
+<div class="footer"><input class='checkbox_class' type=checkbox>
+  <span class='footer_content'>
+    <i>{{configuration.footer_content}}</i>
+  </span>
+</div>
+<br> 
+<div class="footerContainer">
+<button class="btn btn-outline-cancel" (click)="activeModal.dismiss('Cross click')">Cancel</button>
+<button class="btn btn-outline-save">Apply</button>
+<div>
+   </div>
